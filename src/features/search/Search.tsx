@@ -1,28 +1,39 @@
+import api from "services/api";
+import { useState } from "react";
 import { Box } from "@material-ui/core";
 import { useStyles } from "./Search.style";
-import SearchIcon from "@material-ui/icons/Search";
-import { useState } from "react";
-import Api from "services/api";
+import { List } from "features/search/components/List";
+import { Text } from "features/search/components/Text";
+import { Input } from "features/search/components/Input";
+import { Button } from "features/search/components/Button";
+
+
 
 export const Search: React.FC = () => {
 
-    const pegarValue = () => {
-        const user = document.getElementById("inputId") as HTMLInputElement
-        Api.get(user.value).then()
-        const print = user.value
-        console.log(print)
+    const [data, setData] = useState([])
+    const [text, setText] = useState("")
+
+    async function getData (){
+        await api.get(text).then((response) => {
+            setData(response.data.hits)
+        }).catch((err)=>{
+            console.log("Não foi possível fazer a requisição pelo erro" + err)
+        })
     }
 
     const styles = useStyles();
 
-    const [user, setUser] = useState();
-
     return (
-        <Box className={styles.caixa}>
+        <Box className={styles.boxContainer}>
             <label className={styles.label}>Biblioteca OSB</label>
             <Box>
-                <input id="inputId" className={styles.input} type="text" placeholder="Busque seu autor ou livro" />
-                <button onClick={pegarValue} className={styles.botaoFormato}><SearchIcon className={styles.lupa} /></button>
+                <Button onclick={getData} />
+                <Input setText={setText}/>
+            </Box>
+
+            <Box className={styles.midContainer}>
+                
             </Box>
         </Box>
     );

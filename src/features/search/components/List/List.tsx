@@ -17,11 +17,11 @@ export const List: React.FC<PropsList> = ({ author, title, url }) => {
 
     return (
         <Box className={styles.boxContainer}>
-            <Box className={styles.boxDL}>
+            <Box>
                 <dl>
-                    <dt className={styles.author}>{author}</dt>
-                    <dt className={styles.title}>{title}</dt>
-                    <dt className={styles.url}>{url}</dt>
+                    <dt className={styles.DT}><Person /> {author}</dt>
+                    <dt className={styles.DT}><Book /> {title}</dt>
+                    <dt className={styles.DT}><InsertLink /> {url}</dt>
                 </dl>
             </Box>
         </Box>

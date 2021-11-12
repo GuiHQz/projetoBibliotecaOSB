@@ -13,6 +13,9 @@ export const useStyles = makeStyles({
     },
 
     midContainer:{
-        
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center"
     }
 });
